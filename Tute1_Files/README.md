@@ -67,17 +67,17 @@ Now some of the next content you may not have covered in lectures but you will n
 
 Python is known to be very slow but here you can see that that it's actually faster than Cute Files and TinyDir which are written in C!!!!
 
-| Test                     | User   | System | Wall   |   |
-| ------------------------ | ------ | ------ | ------ |   |
-| CPath (Recursion in C)   | 0.020s | 0.062s | 0.082s |   |
-| CPath (Emplace in C)     | 0.020s | 0.063s | 0.083s |   |
-| CPath (Recursive in cpp) | 0.020s | 0.062s | 0.082s |   |
-| CPath (Emplace in cpp)   | 0.020s | 0.063s | 0.083s |   |
-| find                     | 0.021s | 0.126s | 0.147s |   |
-| Python (os.walk)         | 0.156s | 0.081s | 0.237s |   |
-| Cute Files (C)           | 0.041s | 0.243s | 0.284s |   |
-| TinyDir (C)              | 0.050s | 0.244s | 0.294s |   |
-| tree                     | 0.369s | 0.256s | 0.626s |   |
+| Test                     | User   | System | Wall   |   
+| ------------------------ | ------ | ------ | ------ |   
+| CPath (Recursion in C)   | 0.020s | 0.062s | 0.082s |   
+| CPath (Emplace in C)     | 0.020s | 0.063s | 0.083s |   
+| CPath (Recursive in cpp) | 0.020s | 0.062s | 0.082s |   
+| CPath (Emplace in cpp)   | 0.020s | 0.063s | 0.083s |   
+| find                     | 0.021s | 0.126s | 0.147s |   
+| Python (os.walk)         | 0.156s | 0.081s | 0.237s |   
+| Cute Files (C)           | 0.041s | 0.243s | 0.284s |   
+| TinyDir (C)              | 0.050s | 0.244s | 0.294s |   
+| tree                     | 0.369s | 0.256s | 0.626s |   
 
 Why?
 
