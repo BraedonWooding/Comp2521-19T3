@@ -50,12 +50,15 @@ It checks if the condition is false and if it is then it aborts the program with
 
 - What happens when you don't have braces around for loop statements => It will then 'add' braces ONLY around the next statement
 So that
+
 ```c
 if (a)
   b();
   c();
 ```
+
 Is identical to
+
 ```c
 if (a) {
   b();
@@ -254,7 +257,7 @@ The file `out` contains `Hello Sailor` and the file `in` contains just the word 
 
 - What is argc and argv?  => argc is the number of arguments and argv are those arguments as space delimited strings
 - Where does getchar take it's character from => stdin which in this case is going to be `in`
-- What is printed out to terminal and what is the contents of `out` and `in` after running the command. => `in` won't change, `out` will be `heyh`.  Noting is outputted to terminal.
+- What is printed out to terminal and what is the contents of `out` and `in` after running the command. => `in` won't change, `out` will be `helloh`.  Noting is outputted to terminal.
 - What does `>>` do compared to `>` => it appends to the file
 
 ## More IO
