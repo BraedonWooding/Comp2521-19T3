@@ -45,21 +45,79 @@ int main(int argc, char *argv[])
 It may seem obscure at first so let's break it down into individual lines;
 
 - What does `assert` do?
-- What happens when you don't have braces around for loop statements
+
+It checks if the condition is false and if it is then it aborts the program with an error
+
+- What happens when you don't have braces around for loop statements => It will then 'add' braces ONLY around the next statement
+So that
+```c
+if (a)
+  b();
+  c();
+```
+Is identical to
+```c
+if (a) {
+  b();
+}
+
+c();
+```
+
 - What does `sscanf(argv[1], "%d", &N)` do?
+
+It is scanf but for strings, scans in a number from the string `argv[1]`
+
 - Alternatives for `sscanf`?  There are a few...
+
+`atoi, strtol, strtoi` will all work.
+
 - For each of the asserts
   - What are they checking
   - What is a better error message that we could display
+  
+Just generally print out what the values were that you were checking i.e. `N = 4` and print out why that is bad.
+  
 - What does `exit` do?
+
+Exit the program completely.  Like return 0 in main function.
+
 - What is the value of `a[0]` and `a[1]` during the execution of the program
   - Do we care?  Do they even matter?
+  
+We don't care because we never touch them.  They will be undefined.
+
+You can only read memory you write.
+  
 - What does the program produce
+
+The prime numbers according to the [Sieve of Eratosthenes](https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes)
 
 Now some of the next content you may not have covered in lectures but you will need for the lab so I'm still going to cover.
 
 - What is Big O Notation?  i.e. `O(n)` what does that mean?  What does it tell us?
+
+It tells you how fast a function grows.
+
+i.e.
+
+```
+for (int i = 0; i < N; i++) {
+   // 1)
+}
+
+for (int x = 0; x < SIZE; x++) {
+  for (int y = 0; y < SIZE; y++) {
+    // 2)
+  }
+}
+```
+
+The first one will be `O(n)` and the second one will be `O(n * n)` or `O(n^2)`
+
 - What is the Big O Notation of the above code?
+
+The sieve of eratosthenes will be `O(n log (log n))` (which is often referred to as super linear) so I was wrong!  It wasn't `O(n sqrt(n))`.  The reasoning is relatively complex and is due to the prime harmonic series approaching `log(log n)`.
 
 ## A 'real' world example!
 
@@ -67,22 +125,22 @@ Now some of the next content you may not have covered in lectures but you will n
 
 Python is known to be very slow but here you can see that that it's actually faster than Cute Files and TinyDir which are written in C!!!!
 
-| Test                     | User   | System | Wall   |   
-| ------------------------ | ------ | ------ | ------ |   
-| CPath (Recursion in C)   | 0.020s | 0.062s | 0.082s |   
-| CPath (Emplace in C)     | 0.020s | 0.063s | 0.083s |   
-| CPath (Recursive in cpp) | 0.020s | 0.062s | 0.082s |   
-| CPath (Emplace in cpp)   | 0.020s | 0.063s | 0.083s |   
-| find                     | 0.021s | 0.126s | 0.147s |   
-| Python (os.walk)         | 0.156s | 0.081s | 0.237s |   
-| Cute Files (C)           | 0.041s | 0.243s | 0.284s |   
-| TinyDir (C)              | 0.050s | 0.244s | 0.294s |   
-| tree                     | 0.369s | 0.256s | 0.626s |   
+| Test                     | User   | System | Wall   |
+| ------------------------ | ------ | ------ | ------ |
+| CPath (Recursion in C)   | 0.020s | 0.062s | 0.082s |
+| CPath (Emplace in C)     | 0.020s | 0.063s | 0.083s |
+| CPath (Recursive in cpp) | 0.020s | 0.062s | 0.082s |
+| CPath (Emplace in cpp)   | 0.020s | 0.063s | 0.083s |
+| find                     | 0.021s | 0.126s | 0.147s |
+| Python (os.walk)         | 0.156s | 0.081s | 0.237s |
+| Cute Files (C)           | 0.041s | 0.243s | 0.284s |
+| TinyDir (C)              | 0.050s | 0.244s | 0.294s |
+| tree                     | 0.369s | 0.256s | 0.626s |
 
 Why?
 
-- Look at the user time, what does that mean?
-- What is system time?  What does this indicate to us?
+- Look at the user time, what does that mean?  => That the language doesn't always determine the speed
+- What is system time?  What does this indicate to us? => That a lot of time is spent looking at files/folders
 
 What does this tell us!
 
@@ -194,22 +252,22 @@ $ ./my_prog hello there, "John Shepard" < in > out
 
 The file `out` contains `Hello Sailor` and the file `in` contains just the word `hey` prior the running the second command.
 
-- What is argc and argv?
-- Where does getchar take it's character from
-- What is printed out to terminal and what is the contents of `out` and `in` after running the command.
-- What does `>>` do compared to `>`
+- What is argc and argv?  => argc is the number of arguments and argv are those arguments as space delimited strings
+- Where does getchar take it's character from => stdin which in this case is going to be `in`
+- What is printed out to terminal and what is the contents of `out` and `in` after running the command. => `in` won't change, `out` will be `heyh`.  Noting is outputted to terminal.
+- What does `>>` do compared to `>` => it appends to the file
 
 ## More IO
 
 What does each of the following do.  Note `int x;` is defined prior.
 
-- `scanf("%d", x)`
-- `scanf("%d", &x)`
-- `printf("%d", x)`
-- `fscanf(stdin, "%d", &x)`
-- `fscanf(stderr, "%d", &x)`
-- `fprintf(stdout, "%d", x)`
-- `fprintf(stderr, "%d", x)`
+- `scanf("%d", x)` => error not a pointer
+- `scanf("%d", &x)` => fine
+- `printf("%d", x)` => fine
+- `fscanf(stdin, "%d", &x)` => same as the 2nd one
+- `fscanf(stderr, "%d", &x)` => shouldn't scan from stderr
+- `fprintf(stdout, "%d", x)` => Same as the 3rd one
+- `fprintf(stderr, "%d", x)` => Fine, will output to stderr
 
 ## Functions
 
@@ -226,8 +284,10 @@ typedef struct _node_t {
 typedef Node *List;
 ```
 
-- What is good about the typedefs, what is bad?  Is there any ambiguity
-- Write a function to sum up the list using while, for, and then recursive
+- What is good about the typedefs, what is bad?  Is there any ambiguity => There is a lot of ambiguity with pointer typedefs
+- Write a function to sum up the list using while, for, and then recursive 
+
+Coding solutions [here](https://github.com/BraedonWooding/Comp2521-19T3/tree/master/Tute1_Files)!
 
 ## Final Stuff
 
