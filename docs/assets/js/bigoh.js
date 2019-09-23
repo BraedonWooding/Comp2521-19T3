@@ -107,18 +107,18 @@ function addIf(tokens, ast) {
         cur++;
         requireTok(tokens, ["if"]);
       } else {
-        requireTok(tokens, ["endif", "end if"]);
+        requireTok(tokens, ["endif"]);
       }
     }
   } else if (peek(tokens) == "end") {
-    cur++;
+    next(tokens);
     requireTok(tokens, ["if"]);
   } else {
     requireTok(tokens, ["endif"]);
   }
 }
 
-keywords = ["endfor", "else", "elif", "done", "next", "end", "for", "while", "if", "then"]
+keywords = ["endfor", "else", "elif", "endif", "endwhile", "done", "next", "end", "for", "while", "if", "then"]
 valid_calls = ["print", "pop", "enqueue", "push", "dequeue", "rand", "empty", "length", "floor", "ceil", "abs", "sort"]
 calls = {
   "print": ((val) => {;}),
