@@ -1,5 +1,6 @@
 - [Introduction](_introduction)
 - [Wk01](Wk01)
 - [Wk02](Wk02)
+- [BigO Tool](BigOh)
 - **Links**
 - [![Github](https://icongram.jgog.in/simple/github.svg?color=808080&size=16)Github](https://github.com/BraedonWooding/Comp2521-19T3)

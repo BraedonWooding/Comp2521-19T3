@@ -11,4 +11,3 @@ Quite a bit of the tutorial is spent on the board or in a text editor playing ar
 I'll may put up some more exam practice questions towards the end of semester but it'll depend on the ones that are officially released.
 
 I'll also put up resources that are relevant but either no examined or only partially examinable just for interest.
-
