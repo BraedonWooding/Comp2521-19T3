@@ -468,7 +468,7 @@ function runAST(ast) {
     }
     case "call": {
       let arg_values = [];
-      let iterations = 1;
+      let iterations = 0;
       ast.block.args.forEach(element => {
         let [res, its] = runAST(element);
         iterations += its;
@@ -615,6 +615,47 @@ while lo <= hi do
 end while`;
       break;
     }
+    case 3: {
+      document.getElementById("inputScript").value =
+`A = rand n, B = rand n, k = rand
+sum = 0, count = 0
+C = rand 0
+while sum <= k and !empty(A) do
+  v = pop A, push v C
+  sum += v, count += 1
+end while
+
+if sum > k then
+  v = pop C
+  sum -= v, count -= 1
+end if
+best = count
+
+while !empty(B) do
+  v = pop B
+  sum += v, count += 1
+  while sum > k and !empty(C) do
+    v = pop C
+    sum -= v, count -= 1
+  end while
+
+  if sum <= k and count > best then
+    best = count
+  end if
+end while
+`;
+      break;
+    }
+    case 4: {
+      document.getElementById("inputScript").value =
+``;
+      break;
+    }
+    case 5: {
+      document.getElementById("inputScript").value =
+``;
+      break;
+    }
   }
 }
 
@@ -622,6 +663,7 @@ function run() {
   text = document.getElementById("inputScript").value;
   res = document.getElementById("result");
   errs = document.getElementById("error");
+  errs.innerHTML = "";
   cur = 0;
   tokens = text.split("\n").join(";").split(',').join(";")
     .match(/([a-z|A-Z|_][a-z|A-Z|0-9|_]*|;|\(|\)|\[|\]|!=|==|=|%=|>=|<=|\.\.|\.\.\.|\-\>|\*=|\+=|\*\*=|\/=|>|<|\+|\-|\/|\*|%|\*\*|!|~=|\|\||&&|(\d*[\.]?\d+)|[.]\d+)/g)
