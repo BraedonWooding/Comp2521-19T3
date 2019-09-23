@@ -810,7 +810,7 @@ function run() {
           display: true,
           scaleLabel: {
             display: true,
-            labelString: 'iterations'
+            labelString: 'primitive operations'
           },
           min: 0,
           max: max
