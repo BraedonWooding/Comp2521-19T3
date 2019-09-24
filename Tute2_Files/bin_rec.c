@@ -59,4 +59,10 @@ int main(void) {
   assert(bin_search(a1, 0, 13) == -1);
   assert(bin_search(a1, INT32_MAX, 13) == -1);
   assert(bin_search(a1, INT32_MIN, 13) == -1);
+  // single element
+  int a2[1] = {1};
+  assert(bin_search(a2, 0, 1) == -1);
+  assert(bin_search(a2, INT32_MAX, 1) == -1);
+  assert(bin_search(a2, INT32_MIN, 1) == -1);
+  assert(bin_search(a2, 1, 1) == 0);
 }
