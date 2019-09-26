@@ -14,6 +14,8 @@ int foo(int n) {
 }
 ```
 
+> O(n^2)
+
 ```c
 // Returns the index of the wanted element
 // -1 if no such index exists
@@ -35,11 +37,13 @@ int bar(int array[], int len, int wanted) {
 }
 ```
 
-> Think about how many elements you will 'touch'
+> O(log(n))
 
 ## Another recap of recursive functions
 
 Let's rewrite the 'bar' function from before as recursive!
+
+It is under the tute files.
 
 ## DLLs
 
@@ -72,9 +76,9 @@ Do you have any more tips?  If so then let me know and I'll add them here :)
 
 Let's look at writing it both recursively and iteratively just to get some more practice.
 
-1) Psuedocode
-2) Time complexity
-3) In C
+1) Psuedocode (In tute files)
+2) Time complexity (O(n))
+3) In C (In tute files)
 
 ### Computing Polynomials
 
@@ -83,6 +87,8 @@ Let's state that we are given a polynomial inside an array of size `n` i.e. `P(x
 i.e. `double compute_p(double A[], int n, double x);`
 
 Let's design an O(n) function to do above.
+
+In tute files.
 
 #### Interesting Sidepoint that you will cover if you do 3181/3821
 
@@ -99,6 +105,51 @@ Let's try to build an algorithm to add 2 sparse vectors together presuming they 
 > Label the first vector size as `n` and the second vector size as `m` this isn't the dimension of the vector but rather the number of sparse pairs there are.
 
 Consider the cases of worst performance!  Clearly if they both have no pairs it is `O(1)` but that isn't reasonable so we want to consider the WORST performance.  Also the pairs are given in order of index (if they weren't can we still solve this in O(n)?)
+
+```
+VectorSum(v1, v2):
+    i = 0      // index into v1
+    j = 0      // index into v2
+    k = 0      // index into v3
+    v3 = empty vector // result
+    
+    while i <= m-1 and j <= n-1 do
+        if v1[i].x = v2[j].x then
+            // found index with entries in both vectors
+
+            if v1[i].v != -v2[j].v then
+                // only add if the values don't add up to 0
+                v3[k] = (v1[i].x, v1[i].v + v2[j].v)
+                i++, j++, k++
+            end if
+
+        else if v1[i].x < v2[j].x then
+            // copy an entry from v1
+            v3[k] = (v1[i].x, v1[i].v)
+            i++, k++
+
+        else
+            // copy an entry from v2
+            v3[k] = (v2[j].x, v2[j].v)
+            j++, k++
+        end if
+    end while
+
+    // copy any remaining pairs from v1
+    while i < m-1 do
+        v3[k] = (v1[i].x, v1[i].v)
+        i++, k++
+    end while
+
+    // copy any remaining pairs from v2
+    while j < n-1 do
+        v3[k] = (v2[j].x, v2[j].v)
+        j++, k++
+    end while
+    
+    return v3
+end
+```
 
 ## Challenge Exercise!!
 
@@ -126,4 +177,43 @@ Consider the following hints
 - Based purely on theoretical information transfer how many elements do we HAVE to visit to know the optimal solution
 - This theoretical limit should be what we aim for we may not hit it though!
 
+```
+MaxElements(A, B, k):
+    sum = 0, count = 0;
+    C = new Stack
+    
+    // How many can we pop from A?
+    while sum <= k and !empty(A) do
+        v = pop(A); push(C, v)
+        sum = sum + v; count = count + 1
+    end while
+
+    // have we exceeded k?
+    if sum > k then
+        // Just make sure we don't accidentally go to far
+        v = pop(C); sum = sum - v; count = count - 1
+    end if
+    best = count
+
+    // Now add from B
+    // If we go over threshold take from A till we aren't over it
+    while !empty(B) do
+        v = pop(B); sum = sum + v; count = count + 1
+
+        while sum > k and !empty(C) do
+            v = pop(C); sum = sum - v; count = count - 1
+        end while
+
+        // update our best
+        if sum <= k and count > best then
+            best = count
+        end if
+    end while
+
+    return best
+end
+```
+
 How easy is it to write it in C?
+
+Pretty easily if you use linked lists
