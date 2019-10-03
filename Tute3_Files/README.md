@@ -63,10 +63,17 @@ The answers to all coding exercises are under Tute3_Files right [here](https://g
 Implement the following; find and return the number of non leaf nodes in a binary tree.
 
 ```c
-int countInternal(BSTree t) {
+                                                                       int countInternal(BSTree t) {
+  // If it is a leaf than we don't want to count it!
+  // NOTE: leaf nodes have 0 children that is left == NULL
+  //       AND right == NULL
   if (t == NULL || (t->left == NULL && t->right == NULL)) {
     return 0;
   }
+  // Else consider the box model we talked about
+  // We are choosing two smaller boxes of the left and right trees
+  // And adding our node as an internal node since we
+  // Know it MUST have children
   return 1 + countInternal(t->left) + countInternal(t->right);
 }
 ```
@@ -79,14 +86,27 @@ Finds the depth of the given node containing key.  If no node contains key retur
 int nodeDepth(BSTree t, int key) {
   int depth;
   if (t == NULL) {
+    // If we didn't find the node
+    // We know it can't be in an empty tree
     return -1;
   } else if (key == t->value) {
+    // If we found the node than we know that in this box
+    // It has to have a depth of 1.  Remember we can't
+    // think about the larger boxes that this is contained in
+    // Just think about this by itself in it's own little tree
     return 1;
   } else if (key < t->value) {
+    // (The logic for right is the same as this so I'll say it once)
+    // Else we know that the key either doesn't exist or is in the
+    // left tree so we'll query that.
     depth = nodeDepth(t->left, key);
   } else {
     depth = nodeDepth(t->right, key);
   }
+  // If it turns out that we didn't find it
+  // Then we don't want to include our node
+  // If we did find it than we want to include our node
+  // as part of the path.
   if (depth != -1) {
     depth++;
   }
