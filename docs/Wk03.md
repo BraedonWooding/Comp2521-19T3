@@ -1,22 +1,23 @@
-# Week 3 Binary Search Trees (BSTs)
+#Week 3 Binary Search Trees(BSTs)
 
-For the tutorial we will consider the following tree:
+The following website may help to visualise recursion [here](https://visualgo.net/en/recursion) I'll give updating the Big O tool to support functions and a way to visualise the callstack a go maybe this week or next.
 
-```c
-typedef struct BSTNode *BSTree;
+For the tutorial we will consider the following tree :
+
+```c typedef struct BSTNode *BSTree;
 typedef struct BSTNode {
-	int value;
-	BSTree left;
-	BSTree right;
+  int value;
+  BSTree left;
+  BSTree right;
 } BSTNode;
 ```
 
-![](assets/img/tree-orders.png)
+    ![](assets / img / tree - orders.png)
 
-I think it is easier to visualise how to handle the orders via some code.  The basic way to recurse through a BST is:
+        I think it is easier to visualise how to handle the orders via some
+            code.The basic way to recurse through a BST is :
 
-```c
-void recurse_bst(BSTree tree) {
+```c void recurse_bst(BSTree tree) {
   if (tree != NULL) {
     // 1)
     recurse_bst(tree->left);
@@ -27,7 +28,7 @@ void recurse_bst(BSTree tree) {
 }
 ```
 
-Now we can place the following line `printf("%d ", tree->value);` at any one of the positions 1) 2) and 3).
+    Now we can place the following line `printf("%d ", tree->value);` at any one of the positions 1) 2) and 3).
 
 What happens to the order when we do?
 
@@ -37,13 +38,11 @@ What happens to the order when we do?
 
 ?> Are there any trees that have infix == prefix?
 
+> Yes if you only had right nodes than it would have infix == prefix effectively giving you a linked list
+
 ?> Are there any trees that will have all orders be the same
 
-## Extension design some code to print out levels
-
-Print it out in level order.
-
-Introduction to BFS vs DFS
+> Ones with a single node (or NULL!)
 
 ## Some terminology
 
@@ -57,13 +56,18 @@ Introduction to BFS vs DFS
 
 ## Some Exercises
 
+The answers to all coding exercises are under Tute3_Files right [here](https://github.com/BraedonWooding/Comp2521-19T3/tree/master/Tute3_Files)
+
 ### Count Internal
 
 Implement the following; find and return the number of non leaf nodes in a binary tree.
 
 ```c
 int countInternal(BSTree t) {
-  return 42;
+  if (t == NULL || (t->left == NULL && t->right == NULL)) {
+    return 0;
+  }
+  return 1 + countInternal(t->left) + countInternal(t->right);
 }
 ```
 
@@ -73,7 +77,20 @@ Finds the depth of the given node containing key.  If no node contains key retur
 
 ```c
 int nodeDepth(BSTree t, int key) {
-  return -1;
+  int depth;
+  if (t == NULL) {
+    return -1;
+  } else if (key == t->value) {
+    return 1;
+  } else if (key < t->value) {
+    depth = nodeDepth(t->left, key);
+  } else {
+    depth = nodeDepth(t->right, key);
+  }
+  if (depth != -1) {
+    depth++;
+  }
+  return depth;
 }
 ```
 
@@ -83,7 +100,19 @@ Find the height of a tree. i.e. the maximum branch length if a branch is a path 
 
 ```c
 int BSTreeMaxBranchLen(BSTree t) {
-  return 42;
+  if (t == NULL) {
+    return 0;
+  } else {
+    // The branch length will be our node
+    // And the maximum path of our left and right
+    int left = maxBranchLen(t->left);
+    int right = maxBranchLen(t->right);
+    if (left > right) {
+      return left + 1;
+    } else {
+      return right + 1;
+    }
+  }
 }
 ```
 
@@ -94,8 +123,8 @@ Yes!
 For example let's print out a linked list in reverse :O.  But you can't edit the list OR malloc or any crazy stuff!
 
 ```c
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 typedef struct LLNode *LList;
 typedef struct LLNode {
@@ -116,12 +145,16 @@ int main(int argc, char *argv[]) {
     head = new;
   }
   print_reverse(head);
+  putchar('\n');
   return 0;
 }
 
-// How would you normally do it without creating a new list?
 void print_reverse(LList list) {
-  // TODO:
+  if (list == NULL) {
+    printf("X");
+  } else {
+    print_reverse(list->next);
+    printf(" <- %d", list->value);
+  }
 }
 ```
-
