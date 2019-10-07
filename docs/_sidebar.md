@@ -2,6 +2,7 @@
 - [Wk01](Wk01)
 - [Wk02](Wk02)
 - [Wk03](Wk03)
+- [Wk04](Wk04)
 - [BigO Tool](BigOh)
 - [Valgrind and GDB Cheatsheet](gdb_valgrind)
 - **Links**
