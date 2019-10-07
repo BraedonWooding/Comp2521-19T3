@@ -17,7 +17,8 @@ typedef struct BSTNode {
 
 I think it is easier to visualise how to handle the orders via some code.  The basic way to recurse through a BST is :
 
-```c void recurse_bst(BSTree tree) {
+```c
+void recurse_bst(BSTree tree) {
   if (tree != NULL) {
     // 1)
     recurse_bst(tree->left);
