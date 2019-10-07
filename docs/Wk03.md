@@ -13,7 +13,7 @@ typedef struct BSTNode {
 } BSTNode;
 ```
 
-![](assets / img / tree - orders.png)
+![Orders](assets/img/tree-orders.png)
 
 I think it is easier to visualise how to handle the orders via some code.  The basic way to recurse through a BST is :
 
