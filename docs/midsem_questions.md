@@ -1,6 +1,6 @@
 # Midsem Questions
 
-Download the zip file [here](../practice/midsem.zip)
+Download the zip file [here](https://github.com/BraedonWooding/Comp2521-19T3/raw/master/practice/midsem.zip)
 
 ## Difference (difference.c)
 
