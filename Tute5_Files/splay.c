@@ -111,9 +111,9 @@ SplayNode splay(SplayNode root, int key) {
 
     // What do we do?  How many rotations
     // What do we want to do beforehand
-    if (root->left->key > key) {
-    
-    } else if (root->left->key < key) /* Case 3) c) Zig Zag i.e. Left Right */ {
+    if (key < root->left->key) {
+      // Lies in left -> left
+    } else if (key > root->left->key) /* Case 3) c) Zig Zag i.e. Left Right */ {
       // Lies in left -> right    
     }
     
@@ -128,9 +128,9 @@ SplayNode splay(SplayNode root, int key) {
     // Case 4) b) Zag Zig (i.e. Right Left)
     // What do we do?  How many rotations
     // What do we want to do beforehand
-    if (root->right->key > key) {
+    if (key < root->right->key) {
       // lies in right -> left
-    } else if (root->right->key < key) /* Case 4) c) Zig Zag i.e. Right Right */ {
+    } else if (key > root->right->key) /* Case 4) c) Zig Zag i.e. Right Right */ {
       // lies in right -> right
     }
     

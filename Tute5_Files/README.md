@@ -7,13 +7,15 @@ There are many versions of this out there.
 I feel this is the easiest to understand.
 
 ```c
+#include <stdlib.h>
+
 typedef struct node *SplayNode;
 
 struct node {
   SplayNode left;
   SplayNode right;
-  int value;
-}
+  int key;
+};
 
 /*
   For example if we have:
@@ -68,11 +70,11 @@ SplayNode left_rotate(SplayNode node) {
    5   9
       / \
      8  10
-     
+
  left  = 3
         / \
        2   5
-       
+
  2)
        3
       / \
@@ -118,9 +120,9 @@ SplayNode splay(SplayNode root, int key) {
 
     // What do we do?  How many rotations
     // What do we want to do beforehand
-    if (root->left->key > key) {
-    
-    } else if (root->left->key < key) /* Case 3) c) Zig Zag i.e. Left Right */ {
+    if (key < root->left->key) {
+      // Lies in left -> left
+    } else if (key > root->left->key) /* Case 3) c) Zig Zag i.e. Left Right */ {
       // Lies in left -> right    
     }
     
@@ -135,15 +137,15 @@ SplayNode splay(SplayNode root, int key) {
     // Case 4) b) Zag Zig (i.e. Right Left)
     // What do we do?  How many rotations
     // What do we want to do beforehand
-    if (root->right->key > key) {
+    if (key < root->right->key) {
       // lies in right -> left
-    } else if (root->right->key < key) /* Case 4) c) Zig Zag i.e. Right Right */ {
+    } else if (key > root->right->key) /* Case 4) c) Zig Zag i.e. Right Right */ {
       // lies in right -> right
     }
     
     // What do we do now to make it so that our new root is our right child
     // Remember that we may not find our right child (meaning our right may be NULL)
-  } 
+  }
 }
 
 // Returns new root  
@@ -207,7 +209,10 @@ Let `t` be the answer to the above question, what will the tree look like after 
 !> IMPORTANT: In previous exams they have asked questions that require you to know that AVL trees have to be balanced, what denotes that a tree is an AVL tree and thus is balanced?
 
 ```c
+#include <stdlib.h>
+
 typedef struct node *AVLNode;
+
 struct node {
   AVLNode left;
   AVLNode right;
@@ -288,7 +293,7 @@ AVLNode left_rotate(AVLNode root) {
   AVLNode right_left = right->left;
   right->left = root;             // 1)
   root->right = right_left;       // 2)
-  return left;
+  return right;
 }
 
 AVLNode insert(AVLNode root, int key) {
