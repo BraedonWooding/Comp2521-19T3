@@ -8,5 +8,6 @@
 - [Valgrind and GDB Cheatsheet](gdb_valgrind)
 - [Midsem Practice Questions](midsem_questions)
 - [Home Computing](home_computing)
+- [Midsem Practice Solutions](https://github.com/BraedonWooding/Comp2521-19T3/tree/master/PracticeAnswers)
 - **Links**
 - [![Github](https://icongram.jgog.in/simple/github.svg?color=808080&size=16)Github](https://github.com/BraedonWooding/Comp2521-19T3)
