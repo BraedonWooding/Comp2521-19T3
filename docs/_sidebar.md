@@ -4,6 +4,7 @@
 - [Wk03](Wk03)
 - [Wk04](Wk04)
 - [Wk05](Wk05)
+- [Wk06](Wk06)
 - [BigO Tool](BigOh)
 - [Valgrind and GDB Cheatsheet](gdb_valgrind)
 - [Midsem Practice Questions](midsem_questions)
