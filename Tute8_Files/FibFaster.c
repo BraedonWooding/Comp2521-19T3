@@ -2,7 +2,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int fibR(int n, int *memoized) { /* TODO: */ }
+int fibR(int n, int *memoized) {
+    if (memoized[n] == 0) {
+        memoized[n] = fibR(n - 1, memoized) + memoized[n - 2];
+    }
+    return memoized[n];
+}
 
 int fib(int n) {
     assert(n >= 0);
