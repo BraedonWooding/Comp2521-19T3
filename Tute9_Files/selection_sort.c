@@ -1,4 +1,4 @@
-// Presuming linked list
+// Presuprevg linked list
 // you can use the following methods
 
 #include <stdio.h>
@@ -32,35 +32,35 @@ void appendItem(List *xs, int value) {
 List *selectSort(List *xs) {
     List *list = newList();
     int found = 1;
-    int min = -1;
-    int set_min = 0;
+    int prev = -1;
+    int set_prev = 0;
 
     while (found) {
         found = 0;
-        int max = -1;
-        int set_max = 0;
+        int next = -1;
+        int set_next = 0;
         int counter = 0;
         for (Node *n = xs->head; n != NULL; n = n->next) {
-            if (n->value == max && set_max) counter++;
-            if ((n->value > min || !set_min) &&
-                (n->value < max || !set_max)) {
+            if (n->value == next && set_next) counter++;
+            if ((n->value > prev || !set_prev) &&
+                (n->value < next || !set_next)) {
                 counter = 1;
-                max = n->value;
-                set_max = 1;
-                if (!set_min) {
-                    min = n->value;
+                next = n->value;
+                set_next = 1;
+                if (!set_prev) {
+                    prev = n->value;
                 }
             }
         }
 
-        found = set_max;
-        set_min = set_max;
+        found = set_next;
+        set_prev = set_next;
         while (found && counter) {
-            appendItem(list, max);
+            appendItem(list, next);
             counter--;
         }
 
-        min = max;
+        prev = next;
     }
 
     return list;
