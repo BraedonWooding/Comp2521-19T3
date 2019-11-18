@@ -33,34 +33,27 @@ List *selectSort(List *xs) {
     List *list = newList();
     int found = 1;
     int prev = -1;
-    int set_prev = 0;
-
+    int found_prev = 0;
     while (found) {
         found = 0;
-        int next = -1;
-        int set_next = 0;
         int counter = 0;
+        int found_next = 0;
+        int next = -1;
         for (Node *n = xs->head; n != NULL; n = n->next) {
-            if (n->value == next && set_next) counter++;
-            if ((n->value > prev || !set_prev) &&
-                (n->value < next || !set_next)) {
-                counter = 1;
+            if (n->value == next && found_next) counter++;
+            if ((n->value > prev || !found_prev) &&
+                (n->value < next || !found_next)) {
+                found_next = 1;
                 next = n->value;
-                set_next = 1;
-                if (!set_prev) {
-                    prev = n->value;
-                }
+                counter++;
+            }
+
+            found_prev = found;
+            prev = next;
+            for (; counter > 0; counter--) {
+                appendItem(list, next);
             }
         }
-
-        found = set_next;
-        set_prev = set_next;
-        while (found && counter) {
-            appendItem(list, next);
-            counter--;
-        }
-
-        prev = next;
     }
 
     return list;
@@ -70,7 +63,7 @@ List *readList(char **in) {
     List *list = newList();
     while (*in != NULL) {
         appendItem(list, atoi(*in));
-        *in++;
+        in++;
     }
 
     return list;
