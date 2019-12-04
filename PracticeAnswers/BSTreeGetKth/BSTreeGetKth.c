@@ -52,9 +52,9 @@ int SimplerBSTreeGetKth(BSTree t, int k) {
 	if (k == leftSize) {
 		return t->value;
 	} else if (k < leftSize) {
-		return BSTreeGetKth(t->left, k);
+		return SimplerBSTreeGetKth(t->left, k);
 	} else {
-		return BSTreeGetKth(t->right, k - leftSize - 1);
+		return SimplerBSTreeGetKth(t->right, k - leftSize - 1);
 	}
 }
 
