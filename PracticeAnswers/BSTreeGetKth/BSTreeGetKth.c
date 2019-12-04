@@ -3,6 +3,8 @@
 
 #include "BSTree.h"
 
+// I've attached a simpler way of doing this question at the bottom
+
 // Helper function to carry some state along with us
 // Not pure recursion but useful.
 // We set state to -1 when we find the value we want
@@ -39,5 +41,28 @@ int BSTreeGetKth(BSTree t, int k) {
   // This is just one that uses a stack (recursion)
   int state = 0; // find the 0'th smallest
   return BSTreeGetKthRec(t, k, &state);
+}
+
+/*
+  Simpler way.
+*/
+
+int SimplerBSTreeGetKth(BSTree t, int k) {
+	int leftSize = BSTreeSize(t->left);
+	if (k == leftSize) {
+		return t->value;
+	} else if (k < leftSize) {
+		return BSTreeGetKth(t->left, k);
+	} else {
+		return BSTreeGetKth(t->right, k - leftSize - 1);
+	}
+}
+
+static int BSTreeSize(BSTree t) {
+	if (t == NULL) {
+		return 0;
+	} else {
+		return 1 + BSTreeSize(t->left) + BSTreeSize(t->right);
+	}
 }
 
